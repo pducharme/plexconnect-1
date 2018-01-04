@@ -1,5 +1,4 @@
 FROM phusion/baseimage:0.9.17
-MAINTAINER izzno <a.m.andersen@me.com>
 
 # Set correct environment variables
 ENV HOME /root
