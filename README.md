@@ -1,6 +1,16 @@
 ![enter image description here](https://camo.githubusercontent.com/3e9ba499fd311db91f02459bf0ff507620ca04b9/68747470733a2f2f662e636c6f75642e6769746875622e636f6d2f6173736574732f353530343239382f313231373733342f61326333643331362d323661652d313165332d396235322d3932373738343765326230642e706e67)
 
-**PlexConnect for unRAID**
+***PlexConnect for unRAID***
+
+**FIRST TIME USERS**
+
+PlexConnect uses port 53, 80 and 443, so you must move the unRAID management interface to a new port.
+
+1. Edit /boot/config/go
+2. Replace: /usr/local/sbin/emhttp &
+3. With: /usr/local/sbin/emhttp -p XX & (where XX equals the port)
+4. Shutdown your array
+5. Reboot unRAID
 
 **Usage:**
 
@@ -28,13 +38,7 @@ PlexConnect is stored outside the container making sure all changes are saved.
 For how to configure you appletv please see:
 https://github.com/iBaa/PlexConnect/wiki/Install-Guide-AppleTV-Wifi
 
-**FIRST TIME USERS**
+**Troubleshooting**:
 
-PlexConnect uses port 53, 80 and 443, so you must move the unRAID management interface to a new port.
-
-1. Edit /boot/config/go
-2. Replace: /usr/local/sbin/emhttp &
-3. With: /usr/local/sbin/emhttp -p XX & (where XX equals the port)
-4. Shutdown your array
-5. Reboot unRAID
-
+Bofore reporting a problem, please reboot your appleTV and/or restart you docker.
+Report issues: https://github.com/izznogooood/unraid-plexconnect/issues
