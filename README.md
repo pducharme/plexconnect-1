@@ -26,7 +26,7 @@ docker run -d \
 -p 443:443 \
 izzno/unraid-plexconnect
 ```
-
+ 
 **Description**
 
 PlexConnect is stored outside the container making sure all changes are saved.
