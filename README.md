@@ -39,5 +39,5 @@ https://github.com/iBaa/PlexConnect/wiki/Install-Guide-AppleTV-Wifi
 
 **Troubleshooting**:
 
-Bofore reporting a problem, please reboot your appleTV and/or restart you docker.
+Before reporting a problem, please reboot your appleTV and/or pull/restart you're image/container.
 Report issues: https://github.com/izznogooood/unraid-plexconnect/issues
