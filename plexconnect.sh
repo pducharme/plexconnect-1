@@ -1,21 +1,25 @@
 #!/bin/bash
-# Check if existing config file exist, if so will use it.
-  
- echo "*** Check if previous config exist, if so will use it..."  
-  if [ -f /config/Settings.cfg ]; then   
-    cp /config/Settings.cfg /opt/plexconnect/Settings.cfg
-  else
-    /usr/bin/python /opt/plexconnect/Settings.py 
-  fi
+#If this is the first time you run the container, clone (get) PlexConnect, else update
+if [ ! -f /opt/PlexConnect/ATVSettings.cfg ]; then
+  cd /opt
+  git clone https://github.com/iBaa/PlexConnect.git
+else
+  cd /opt/PlexConnect
+  git pull
+fi
 
- echo "*** Check if previous ATVconfig exist, if so will use it..."  
-  if [ -f /config/ATVSettings.cfg ]; then   
-    cp /config/ATVSettings.cfg /opt/plexconnect/ATVSettings.cfg
-  else
-    echo "*** Copy Done."
-  fi
+# Generate SSL certificates if they don't exist
+if [ -f /opt/PlexConnect/assets/certificates/trailers.pem ] ; then
+  echo "SSL certs exist"
+else
+  openssl req -new -nodes -newkey rsa:2048 -out /opt/PlexConnect/assets/certificates/trailers.pem -keyout /opt/PlexConnect/assets/certificates/trailers.key -x509 -days 7300 -subj "/C=US/CN=trailers.apple.com"
+  openssl x509 -in /opt/PlexConnect/assets/certificates/trailers.pem -outform der -out /opt/PlexConnect/assets/certificates/trailers.cer && cat /opt/PlexConnect/assets/certificates/trailers.key >> /opt/PlexConnect/assets/certificates/trailers.pem
+fi
 
-# Run the PlexConnect  
+#Correct ownership
+chown nobody:users /opt/PlexConnect
+
+# Run PlexConnect  
 echo "*** Launching PlexConnect..."
-exec /usr/bin/python /opt/plexconnect/PlexConnect.py
+python /opt/PlexConnect/PlexConnect.py
 
